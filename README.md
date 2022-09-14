@@ -1,9 +1,7 @@
 # Predicting Phenology
 
 
-The [GenoPhenoEnvo team](https://genophenoenvo.github.io/) submitted forecasts of forest phenology inferred from webcams to the [EFI Spring 2021, Fall 2021, and Spring 2022 Challenge](https://ecoforecast.org/efi-rcn-forecast-challenges/)s. Results for submitted forecasts can be viewed on the EFI-NEON Ecological Forecasting Challenge Dashboard, [here](https://shiny3.ecoforecast.org/), where you can explore results such as:
-
-![Screenshot of the EFI Forecasting Challenge Results showing forecasts from models in this repository.](figures/efi_results_image.jpeg)
+The [GenoPhenoEnvo team](https://genophenoenvo.github.io/) submitted forecasts of forest phenology inferred from webcams to the [EFI Spring 2021, Fall 2021, and Spring 2022 Challenge](https://ecoforecast.org/efi-rcn-forecast-challenges/)s. Results for submitted forecasts can be viewed on the EFI-NEON Ecological Forecasting Challenge Dashboard, [here](https://shiny3.ecoforecast.org/).
 
 ## Background
 
