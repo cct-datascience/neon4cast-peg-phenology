@@ -1,49 +1,23 @@
-# neon4cast-example
+# Predicting Phenology
 
-This repository is a template example for generating a forecast that is automated through GitHub actions.
 
-## Applying this repository to a new forecast
 
-1) Click "Use This Template" to copy this example to your Github account.
-1) Modify `forecast_model.R` to make your forecast model .  Many of the components you need to generate the forecast, including downloading NOAA weather forecasts, downloading target data, generating forecast files, generating metadata, validating files, and submitting forecasts. Avoid running the `neon4cast::submit()` function at the end of `forecast_model.R` until you are ready to submit a forecast to the Challenge.  It is important that you do NOT change the name of the file.  GitHub Actions (below) is looking for this file name. Be sure to change your `team_name` and `team_list`
-2) Commit and push the changes to `forecast_model.R` to Github. 
+## ETS Seasonal + Exponential Smoothing Model
 
-Ready to submit a forecast?
+The original aim of having a 'simple model' was work out the mechanisms of the forecast challenge. We call it 'simple' because these models have a single input - the historical time series of the variable (gcc or rcc) from 2016 through day t-1 to predict values of the variable through day t+1:t+180.
 
-3) Uncomment the line with the function `neon4cast::submit(forecast_file = forecast_file,metadata = metadata_file, ask = FALSE)`
-4) Commit and push the changes to `forecast_model.R` to Github. 
+Although it started as a 'simple' moving window prediction, we later implemented an seasonal plus exponential smoothing model using the R forecast package.
 
-## Manually running forecast in GitHub actions
+Inputs and outputs were the same for both models. Neither model used gcc or rcc.
 
-1) Under the actions tab, click on ".github/workflows/do_prediction.yml" on the left side.
-2) Click "Run workflow", then the green "Run workflow" button. 
+-   Inputs: historical time series of gcc or rcc from NEON Phenocam sites.
+-   Outputs: daily, 35 day forecasts of gcc and rcc
 
-## Automatically running forecast in GitHub actins
+This is not actually a simple model, it is in fact a very sophisticated Seasonally-adjusted exponential smoothing state-space model. In this case, it is only simple in that it is both univariate and easy to implement using the `forecast` R package (Hyndman & Khandakar, 2008) following the clear explanations provided in the Forecasting Principles and Practice text (Hyndman & Athanasopoulos, 2018).
 
-The forecast in this repository is designed to run daily at 20:00 UTC.  The execution of the forecast occurs on GitHub's servers, so your local computer does not need to be turned on.  In ".github/workflow/do_prediction.yml", the lines `-cron: "* 20 * *"` define the time that the forecast is run.  In this case it is run each day at 20:00:00 UTC (note all GitHub timings are on UTC).  You can update this to run on a different schedule based on timing codes found in https://crontab.guru
+Hyndman, R.J., & Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on \<current date\>.
 
-To start the automated forecast generation
-1) Find the file `do_predictions.yml` in the `.github/workflows` on GitHub.
-2) Click the edit (pencil) button to edit the file.
-3) Remove the `#` before the words "schedule" and "-cron".  See below:
-
-Change
-
-```
-on:
-  workflow_dispatch:
-  #schedule:
-  #- cron: "0 20 * * *"
-```
-to
-```
-on:
-  workflow_dispatch:
-  schedule:
-  - cron: "0 20 * * *"
-```
-
-A video describing how to use GitHub actions for automated forecast generation can be found here: https://youtu.be/dMrUlXi4_Bo
+Hyndman RJ, Khandakar Y (2008). "Automatic time series forecasting: the forecast package for R." \_Journal of Statistical Software\_, \*26\*(3), 1-22. doi: 10.18637/jss.v027.i03 (URL:[https://doi.org/10.18637/jss.v027.i03).](https://doi.org/10.18637/jss.v027.i03).)
 
 ## Running in mybinder
 
