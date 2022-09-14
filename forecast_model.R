@@ -3,6 +3,7 @@ library(tidyr)
 library(ggplot2)
 library(lubridate)
 library(data.table)
+library(forecast)
 
 
 file <- 'https://data.ecoforecast.org/neon4cast-targets/phenology/phenology-targets.csv.gz'
@@ -32,9 +33,6 @@ gcc <- gcc_raw %>%
 readr::write_csv(gcc, 'gcc.csv')
 
 # BEGIN Simple Seasonal + Exponential Smoothing Model
-library(forecast)
-library(hts)
-library(tidyr)
 gcc_wide <- gcc %>% 
   dplyr::select(datetime, site_id, gcc_90) %>% 
   pivot_wider(id_cols = datetime, names_from = site_id, values_from = gcc_90) %>% 
