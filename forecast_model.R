@@ -27,7 +27,7 @@ middle_month <- ifelse(end_month - this_month == 2, this_month + 1, 0)
 gcc <- gcc_raw %>% 
   pivot_wider(id_cols = c(datetime, site_id), 
               names_from = variable, 
-              values_from = observed) %>% 
+              values_from = observation) %>% 
   mutate(month = month(datetime), year = year(datetime), day = day(datetime), doy = yday(datetime))
 
 readr::write_csv(gcc, 'gcc.csv')
