@@ -68,11 +68,11 @@ rcc_preds_wide <- rcc_future %>%
 gcc_preds <- gcc_preds_wide %>%  
   mutate(variable = 'gcc_90') %>% 
   tidyr::pivot_longer(cols = c('mu', 'sigma'), 
-                      names_to = 'parameter', values_to = 'predicted')
+                      names_to = 'parameter', values_to = 'prediction')
 rcc_preds <- rcc_preds_wide %>%  
   mutate(variable = 'rcc_90') %>% 
   tidyr::pivot_longer(cols = c('mu', 'sigma'), 
-                      names_to = 'parameter', values_to = 'predicted')
+                      names_to = 'parameter', values_to = 'prediction')
 
 preds <- bind_rows(gcc_preds, rcc_preds) %>% 
 #  left_join(rcc_preds, by = c("datetime", "site_id", "parameter")) %>% 
